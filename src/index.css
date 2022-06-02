@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Exo:400,700");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Exo, sans-serif;
+}
+
+/* * {border: #c3c3c3 1px dotted} */
+
+body {
+  /* background-image: linear-gradient(
+    to top right,
+    #450a5c,
+    #b638e8,
+    #d791f3 110%
+  ); */
+  background-color: #1c1e21;
+  position: inherit;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  background-color: #202123;
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #303338;
+  border-radius: 10px;
+}
+
