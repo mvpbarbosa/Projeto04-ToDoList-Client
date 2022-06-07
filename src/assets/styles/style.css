@@ -9,12 +9,6 @@
 /* * {border: #c3c3c3 1px dotted} */
 
 body {
-  /* background-image: linear-gradient(
-    to top right,
-    #450a5c,
-    #b638e8,
-    #d791f3 110%
-  ); */
   background-color: #1c1e21;
   position: inherit;
   background-repeat: no-repeat;
@@ -27,7 +21,6 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #303338;
+  background-color: #3d3d3d;
   border-radius: 10px;
 }
-
