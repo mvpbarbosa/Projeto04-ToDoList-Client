@@ -1,0 +1,79 @@
+.CreatePostModal {
+  background-color: #303338;
+  color: white;
+  padding: 2rem;
+  border-radius: 2rem;
+  align-items: center;
+  max-width: 300px;
+}
+
+.CreatePostModal form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.CreatePostModal div {
+  width: 100%;
+}
+.CreatePostModal input {
+  width: 95%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  border: none;
+  background-color: #696969;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: white;
+}
+
+input#name {
+  width: 95%;
+}
+
+textarea {
+  color: white;
+  margin-top: 0.5rem;
+  resize: none;
+  width: 93%;
+  height: 8rem;
+  background-color: #696969;
+  border: none;
+  padding: 10px;
+  border-radius: 1rem;
+}
+
+::placeholder {
+  color: white;
+  opacity: 50%;
+}
+
+.CreatePostModal__dateHour {
+  display: none;
+}
+
+.CreatePostModal__submit {
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  width: 50%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  border: solid 1px #696969;
+  background-color: #696969a9;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: white;
+}
+
+.CreatePostModal__submit:hover {
+    transform: scale(1.1);
+    border: solid 1px #69696900;
+    background-color: #696969;
+}
+
+form h2 {
+    margin-bottom: 1rem;
+}
+
+input#file-upload-button {
+    background-color: #696969;
+}

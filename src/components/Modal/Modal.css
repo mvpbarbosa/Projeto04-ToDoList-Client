@@ -1,0 +1,33 @@
+.Modal {
+  margin: 1rem;
+  width: auto;
+  height: auto;
+  min-height: 300px;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.Modal__close {
+  display: flex;
+  justify-content: end;
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.Modal__close:hover {
+  transform: scale(1);
+}
+
+.Modal__body {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

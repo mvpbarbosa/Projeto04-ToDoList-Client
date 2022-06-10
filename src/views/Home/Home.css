@@ -1,3 +1,42 @@
 .Home__Container {
   margin-top: 8rem;
 }
+.CreatePost {
+  border:none;
+  border-radius: 2rem;
+  min-width: 742px;
+  width: 50%;
+  margin:auto;
+  margin-bottom: 2rem;
+  height: auto;
+  background-color: #303338;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ProfileIcon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.FakeInput {
+  color: white;
+  background-color: #ffffff15;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem;
+  font-size: 15px;
+  height: 25px;
+  max-height: none;
+  width: 90%;
+  cursor: pointer;
+  transition: ease-in-out all 0.2s;
+  align-items: center;
+}
+
+.FakeInput:hover {
+  background-color: #ffffff30;
+}

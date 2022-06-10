@@ -1,6 +1,10 @@
 import "./Navbar.css";
 
 function Navbar() {
+
+  // Função para imprimir a data na tela
+  
+
   return (
     <div className="Navbar">
       <div className="LogoTitle">

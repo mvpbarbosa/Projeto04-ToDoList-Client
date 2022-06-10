@@ -1,23 +1,41 @@
 import "./PostList.css";
-import { posts } from "mocks/posts.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PostListItem from "components/PostListItem/PostListItem";
+import { PostService } from "services/PostService";
+import PostModalDetails from "components/PostModalDetails/PostModalDetails";
 
 function PostList() {
-  const [selectedPost, setSelectedPost] = useState({});
+  const [posts, setPosts] = useState([]);
   const [like, setLike] = useState(false);
+  const [postModal, setPostModal] = useState(false);
 
-  const SwitchLike = (likeValue,index) => {
+  const SwitchLike = (likeValue, postLike) => {
     setLike(!like);
     console.log(like);
-    likeValue = 0
+    likeValue = postLike;
     if (like === true) {
-      likeValue = +1
+      likeValue = likeValue +1;
     } else {
-      likeValue= 0
+      likeValue = likeValue -1;
     }
-    console.log(likeValue) 
+
+    // console.log(likeValue)
+    // console.log(postLike)
   };
+
+  const getList = async () => {
+    const response = await PostService.getList();
+    setPosts(response);
+  };
+
+  const getPostById = async (postId) => {
+    const response = await PostService.getById(postId)
+    setPostModal(response)
+  }
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   // const addLike = (postIndex) => {
   //   const post = {
@@ -47,12 +65,20 @@ function PostList() {
         <PostListItem
           key={`PostListItem__${index}`}
           post={post}
-          selectedPost={selectedPost[index]}
           index={index}
           SwitchLike={SwitchLike}
           like={like}
+          clickItem={(postId) => getPostById(postId)}
         />
+        
       ))}
+      {postModal && (
+        <PostModalDetails
+          post={postModal}
+          closeModal={() => setPostModal(false)}
+        />
+      )}
+
     </div>
   );
 }

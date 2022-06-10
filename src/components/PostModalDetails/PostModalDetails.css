@@ -1,0 +1,53 @@
+.PostDetailsModal {
+    border: none;
+    border-radius: 2rem;
+    width: 50%;
+    min-width: 600px;
+    min-height: 100px;
+    margin: 2rem auto;
+    height: auto;
+    background-color: #303338;
+    padding: 1.2rem;
+    color: white;
+  }
+  
+  .PostDetailsModal__Header {
+    display: flex;
+    align-items: center;
+  }
+  
+  img.PostDetailsModal__photo {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+  }
+  
+  .nameHour h3 {
+    color: white;
+    font-size: 22px;
+  }
+  
+  .nameHour {
+    margin-left: 0.5rem;
+  }
+  
+  .nameHour h4 {
+    font-size: 10px;
+    color: #818181;
+    
+  }
+  
+  .PostDetailsModal__Main {
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0 1rem;
+    color: white;
+    
+  }
+
+  .PostDetailsModal__Main h4 {
+    font-weight: 400;
+    margin-top: 1.5%;
+    padding: 0 3%;
+    font-size: 20px;
+  }
