@@ -8,6 +8,6 @@ const PostContext = {
 };
 
 export const Api = {
-  baseUrl: "https://api-friendszone.herokuapp.com",
+  baseUrl: process.env.REACT_APP_API_URL,
   ...PostContext,
 };

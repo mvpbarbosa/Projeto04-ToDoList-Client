@@ -2,10 +2,43 @@ import "./Home.css";
 import { useState } from "react";
 import PostList from "components/PostList/PostList.jsx";
 import Navbar from "components/Navbar/Navbar";
-import CreatePostModal from "components/CreatePostModal/CreatePostModal";
+import CreateEditPostModal from "components/CreateEditPostModal/CreateEditPostModal";
+import { ActionMode } from "constants/index";
 
 function Home() {
   const [canShowCreatePostModal, setCanShowCreatePostModal] = useState(false);
+  const [postToCreate, setPostToCreate] = useState();
+
+  const [postToEdit, setPostToEdit] = useState();
+  const [postToDelete, setPostToDelete] = useState();
+
+  const [currentMode, setCurrentMode] = useState(ActionMode.NORMAL);
+
+  const handleDeletePost = (postForDelete) => {
+    setPostToDelete(postForDelete);
+  };
+
+  const handleUpdatePost = (postToUpdate) => {
+    setPostToEdit(postToUpdate);
+    handleActions(ActionMode.UPDATE)
+    setCanShowCreatePostModal(true);
+
+  };
+
+  console.log(currentMode)
+
+
+  const handleActions = (action) => {
+    const newAction = currentMode === action ? ActionMode.NORMAL : action;
+    setCurrentMode(newAction);
+  };
+
+  const handleCloseModal = () => {
+    setCanShowCreatePostModal(false);
+    setPostToCreate();
+    setPostToEdit();
+    setPostToDelete();
+  };
 
   const createPost = () => {
     setCanShowCreatePostModal(true);
@@ -26,8 +59,23 @@ function Home() {
             <span>Type text</span>
           </div>
         </div>
-        {canShowCreatePostModal && <CreatePostModal closeModal={() => setCanShowCreatePostModal(false)}/>}
-        <PostList />
+
+        <PostList
+          setCanShowCreatePostModal={setCanShowCreatePostModal}
+          mode={ActionMode.UPDATE}
+          createdPost={postToCreate}
+          deletePost={handleDeletePost}
+          updatePost={handleUpdatePost}
+          handleActions={handleActions}
+        />
+        {canShowCreatePostModal && (
+          <CreateEditPostModal
+            mode={currentMode}
+            closeModal={handleCloseModal}
+            onCreatePost={(post) => setPostToCreate(post)}
+            postToUpdate={postToEdit}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
-import { DateTime } from "luxon";
-import "./CreatePostModal.css";
+// import { DateTime } from "luxon";
+import { PostService } from "services/PostService";
+import "./CreateEditPostModal.css";
+import { ActionMode } from "constants/index";
 
-function CreatePostModal({ closeModal }) {
+function CreateEditPostModal({ closeModal, onCreatePost, mode, postToUpdate, onUpdatePost }) {
   const form = {
-    photo: "",
-    name: "",
-    text: "",
-    dateHour: "",
+    photo: postToUpdate?.photo ?? "",
+    name: postToUpdate?.name ?? "",
+    text: postToUpdate?.text ?? "",
   };
 
   const [state, setState] = useState(form);
@@ -19,21 +20,18 @@ function CreatePostModal({ closeModal }) {
 
   const [canDisable, setCanDisable] = useState(true);
 
-  const newDateHour = () => {
-    const dateDescription = DateTime.now().toLocaleString({
-      ...DateTime.DATE_FULL,
-      weekday: "long",
-    });
+  // const newDateHour = () => {
+  //   const dateDescription = DateTime.now().toLocaleString({
+  //     ...DateTime.DATE_FULL,
+  //     weekday: "long",
+  //   });
 
-    return (state.dateHour = dateDescription);
-  };
+  //   state.dateHour = dateDescription;
+  // };
 
   const canDisableSendButton = () => {
     const response = !Boolean(
-      state.photo.length &&
-        state.name.length &&
-        state.text.length &&
-        state.dateHour.length
+      state.photo.length && state.name.length && state.text.length
     );
     setCanDisable(response);
   };
@@ -41,14 +39,54 @@ function CreatePostModal({ closeModal }) {
   useEffect(() => {
     canDisableSendButton();
   });
+
+  const handleSend = async () => {
+
+    const { photo, name, text } = state;
+
+    const post = {
+      photo,
+      name,
+      text,
+    };
+    
+    const serviceCall = {
+      [ActionMode.NORMAL]: () => PostService.create(post),
+      [ActionMode.UPDATE]: () => PostService.updateById(postToUpdate?.id, post)
+    }
+
+    const response = await serviceCall[mode]();
+
+    const actionResponse = {
+      [ActionMode.NORMAL]: () => onCreatePost(response),
+      [ActionMode.UPDATE]: () => onUpdatePost(response),
+    }
+
+    actionResponse[mode]();
+
+    const reset = {
+      photo: "",
+      name: "",
+      text: "",
+    }
+
+    setState(reset)
+    closeModal();
+  };
+
+  
+  const editPost = async () => {
+      
+  }
+
   return (
     <Modal closeModal={closeModal}>
       <div className="CreatePostModal">
         <form autoComplete="off">
-          <h2>Create new post</h2>
+          <h2>{ActionMode.UPDATE === mode ? 'Update' : 'Create'} post</h2>
 
           <div>
-            <label className="CreatePostModal__photo" htmlFor="photo"></label>
+            <label className="CreatePostModal__photo-label" htmlFor="photo"></label>
             {!state.photo.length ? "Select image" : state.photo}
             <input
               className="CreatePostModal__photo"
@@ -100,10 +138,10 @@ function CreatePostModal({ closeModal }) {
           <button
             className="CreatePostModal__submit"
             type="button"
-            // disabled={canDisable}
-            onClick={console.log("Estou aqui")}
+            disabled={canDisable}
+            onClick={handleSend}
           >
-            Submit
+            {ActionMode.UPDATE === mode ? 'Update' : 'Submit'}
           </button>
         </form>
       </div>
@@ -111,4 +149,4 @@ function CreatePostModal({ closeModal }) {
   );
 }
 
-export default CreatePostModal;
+export default CreateEditPostModal;

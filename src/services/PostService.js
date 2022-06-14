@@ -9,19 +9,30 @@ const transformPost = (post) => {
     photo: post.photo,
     name: post.name,
     dateHour: post.dateHour,
-    like: post.like
-  }
-}
+    like: post.like,
+  };
+};
 
-const parseTransformList = (response) => parseResponse(response).then(posts => posts.map(transformPost))
+const parseTransformList = (response) =>
+  parseResponse(response).then((posts) => posts.map(transformPost));
 
-const parseTransformItem = (response) => parseResponse(response).then(transformPost)
+const parseTransformItem = (response) =>
+  parseResponse(response).then(transformPost);
 
 export const PostService = {
-  getList: () => fetch(Api.postList(), { method: "GET" }).then(parseTransformList),
+  getList: () =>
+    fetch(Api.postList(), { method: "GET" }).then(parseTransformList),
   getById: (id) =>
     fetch(Api.postById(id), { method: "GET" }).then(parseResponse),
-  create: () => fetch(Api.createPost(), { method: "POST" }).then(parseTransformItem),
+  create: (post) =>
+    fetch(Api.createPost(), {
+      method: "POST",
+      body: JSON.stringify(post),
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(parseTransformItem),
   updateById: (id) =>
     fetch(Api.updatePostById(id), { method: "PUT" }).then(parseResponse),
   deleteById: (id) =>

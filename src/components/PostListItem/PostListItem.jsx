@@ -1,5 +1,7 @@
 import "./PostListItem.css";
-function PostListItem({post,  index, SwitchLike, clickItem}) {
+import { ActionMode } from "constants/index";
+
+function PostListItem({post,  index, SwitchLike, clickItem, updatePost, mode, deletePost, setCanShowCreatePostModal, handleActions}) {
 
   const LikeAndDislike = () => {
       SwitchLike(post.like)
@@ -19,7 +21,7 @@ function PostListItem({post,  index, SwitchLike, clickItem}) {
         <ul className="c-dropdown">
           <img src={require("assets/images/more.png")} alt="" />
           <ul className="c-dropdown__submenu">
-            <li className="c-dropdown__submenu-item">
+            <li className={`c-dropdown__submenu-item Post ${mode === ActionMode.UPDATE && "Post--activated"}`} onClick={() => updatePost()}>
               <img src={require("assets/images/edit-icon.png")} alt="" />
               <a className="c-dropdown__submenu-link">Edit</a>
             </li>

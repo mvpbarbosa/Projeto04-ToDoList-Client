@@ -135,6 +135,10 @@
       transparent
     );
   }
+
+  /* .Post--activated {
+    background: rgba(148, 0, 211);
+  } */
   
   .PostListItem__Main {
     font-family: Arial;
